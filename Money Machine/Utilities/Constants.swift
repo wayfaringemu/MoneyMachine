@@ -11,8 +11,16 @@ import UIKit
 
 // MARK: - Enums
 
-enum Tags {
-    case Food, Health, Home, Tech, Vehicle, Clothes, Account, Other
+enum Tags: String {
+   
+    case Food = "Food"
+    case Health = "Health"
+    case Home = "Home"
+    case Tech = "Tech"
+    case Vehicle = "Vehicle"
+    case Clothes = "Clothes"
+    case Account = "Account"
+    case Other = "Other"
 }
 
 enum TransactionType {

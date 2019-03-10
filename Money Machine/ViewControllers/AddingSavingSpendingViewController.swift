@@ -96,6 +96,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         }
         transaction.transactionType = Constants.transactionType
         Constants.expensesArray.append(transaction)
+        self.saveData(transaction: Constants.expensesArray)
         tableView.reloadData()
     }
     
@@ -117,6 +118,8 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     }
     
     @IBAction func addTransactionButtonTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         if let description = descriptionTextField.text, let value = valueTextField.text {
             valueString = value
             descriptionString = description
@@ -136,6 +139,11 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
                 addToArray()
             }
         }
+        valueTextField.text = ""
+        descriptionTextField.text = ""
+        tagButtonCollection[selectedButton].backgroundColor = .white
+        tagButtonCollection[selectedButton].setTitleColor(.orange, for: .normal)
+        selectedButton = 9
     }
     
     // MARK: - Alert
@@ -155,25 +163,71 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionUITableViewCell") as? TransactionUITableViewCell,
-                let date = Constants.expensesArray[indexPath.row].date,
-                let transactionDescription = Constants.expensesArray[indexPath.row].transactionDescription,
-                let amount = Constants.expensesArray[indexPath.row].transactionAmount
-            {
-                cell.dateLabel.text =  (String(describing: date))
-                cell.descriptionLabel.text = transactionDescription
-                let amountString = String(describing: amount)
-                cell.amountLabel.text = "$\(amountString)"
-                
-                return cell
+        let cell: UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") else {
+                return UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "UITableViewCell")
+            }
+            return cell
+        }()
+        
+        if let date = Constants.expensesArray[indexPath.row].date,
+            let transactionDescription = Constants.expensesArray[indexPath.row].transactionDescription,
+            let amount = Constants.expensesArray[indexPath.row].transactionAmount {
+            let amountString = String(describing: amount)
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+
+            cell.textLabel?.text       = "\(date.stripTime(currentDate: date))    \(transactionDescription)"
+            
+            if let tagType = Constants.expensesArray[indexPath.row].tag {
+                cell.detailTextLabel?.text = "\(tagType.rawValue)    $\(amountString)"
+            } else {
+                cell.detailTextLabel?.text = "$\(amountString)"
+            }
+        } else {
+            cell.textLabel?.text       = ""
+            cell.detailTextLabel?.text = ""
         }
-        return UITableViewCell()
+        return cell
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionUITableViewCell") as? TransactionUITableViewCell,
+//                let date = Constants.expensesArray[indexPath.row].date,
+//                let transactionDescription = Constants.expensesArray[indexPath.row].transactionDescription,
+//                let amount = Constants.expensesArray[indexPath.row].transactionAmount
+//            {
+//                cell.dateLabel.text =  date.stripTime(currentDate: date)
+//                cell.descriptionLabel.text = transactionDescription
+//                let amountString = String(describing: amount)
+//                cell.amountLabel.text = "$\(amountString)"
+//                if let tagType = Constants.expensesArray[indexPath.row].tag {
+//                    cell.tagLabel?.text = tagType.rawValue
+//                    cell.tagLabel?.backgroundColor = UIColor.lightGray
+//                } else {
+//                    cell.tagLabel?.text = ""
+//                }
+//
+//                return cell
+//        }
     }
+    
+    
 }
 
 class TransactionUITableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel?
     @IBOutlet weak var amountLabel: UILabel!
+
 }
+

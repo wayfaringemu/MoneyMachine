@@ -25,7 +25,7 @@ class MoneyMachineViewController: UIViewController {
         }
     }
     
-    func saveData(transaction: Transaction) {
+    func saveData(transaction: [Transaction]) {
         
         if let appContext = context, let entity = NSEntityDescription.entity(forEntityName: "User", in: appContext) {
             
@@ -34,6 +34,8 @@ class MoneyMachineViewController: UIViewController {
             newTransaction.transactionArray = Constants.expensesArray
             
             do {
+                try appContext.delete(newTransaction)
+
                 try appContext.save()
                 
             } catch {
@@ -51,8 +53,10 @@ class MoneyMachineViewController: UIViewController {
         do {
             let result = try context?.fetch(request)
             for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "transactionArray") as Any)
-                
+                print(data.value(forKey: "transactionArray") as! [Transaction])
+                if let transactionArray = data.value(forKey: "transactionArray") as? [Transaction] {
+                    Constants.expensesArray = transactionArray
+                }
                 
             }
             

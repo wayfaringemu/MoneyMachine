@@ -19,6 +19,7 @@ class LoadingViewController: MoneyMachineViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
     }
     
     func setupView() {

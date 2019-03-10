@@ -23,3 +23,15 @@ class Transaction: NSObject {
     var tag: Tags?
     var transactionType: TransactionType?
 }
+
+
+extension Date {
+    func stripTime(currentDate: Date) -> String {
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString:String = dateFormatter.string(from: currentDate as Date)
+        
+        return dateString
+    }
+}
+

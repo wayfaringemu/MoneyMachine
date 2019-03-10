@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		A9A8DD252232D93A00F07646 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD242232D93A00F07646 /* AppDelegate.swift */; };
-		A9A8DD272232D93A00F07646 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD262232D93A00F07646 /* ViewController.swift */; };
 		A9A8DD2A2232D93A00F07646 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A8DD282232D93A00F07646 /* Main.storyboard */; };
 		A9A8DD2D2232D93A00F07646 /* Money_Machine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD2B2232D93A00F07646 /* Money_Machine.xcdatamodeld */; };
 		A9A8DD2F2232D93D00F07646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9A8DD2E2232D93D00F07646 /* Assets.xcassets */; };
 		A9A8DD322232D93D00F07646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9A8DD302232D93D00F07646 /* LaunchScreen.storyboard */; };
 		A9A8DD3D2232D93D00F07646 /* Money_MachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD3C2232D93D00F07646 /* Money_MachineTests.swift */; };
+		A9A8DD492232DF5500F07646 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD482232DF5500F07646 /* LoadingViewController.swift */; };
+		A9A8DD4B2232DF7800F07646 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4A2232DF7800F07646 /* Constants.swift */; };
+		A9A8DD4D2232DF8600F07646 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4C2232DF8600F07646 /* Structs.swift */; };
+		A9A8DD4F2232E27A00F07646 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4E2232E27A00F07646 /* DataObjects.swift */; };
+		A9A8DD512233F1D800F07646 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD502233F1D800F07646 /* LandingViewController.swift */; };
+		A9A8DD5422341A6C00F07646 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */; };
+		A9A8DD562234208200F07646 /* AddingSavingSpendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD552234208200F07646 /* AddingSavingSpendingViewController.swift */; };
+		A9A8DD582234208E00F07646 /* ReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD572234208E00F07646 /* ReportingViewController.swift */; };
+		A9A8DD5A22344B5600F07646 /* MoneyMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +37,6 @@
 /* Begin PBXFileReference section */
 		A9A8DD212232D93A00F07646 /* Money Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A8DD242232D93A00F07646 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A9A8DD262232D93A00F07646 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9A8DD292232D93A00F07646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A9A8DD2C2232D93A00F07646 /* Money_Machine.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Money_Machine.xcdatamodel; sourceTree = "<group>"; };
 		A9A8DD2E2232D93D00F07646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +45,15 @@
 		A9A8DD382232D93D00F07646 /* Money MachineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Money MachineTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A8DD3C2232D93D00F07646 /* Money_MachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money_MachineTests.swift; sourceTree = "<group>"; };
 		A9A8DD3E2232D93D00F07646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9A8DD482232DF5500F07646 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		A9A8DD4A2232DF7800F07646 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A9A8DD4C2232DF8600F07646 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		A9A8DD4E2232E27A00F07646 /* DataObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
+		A9A8DD502233F1D800F07646 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
+		A9A8DD552234208200F07646 /* AddingSavingSpendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingSavingSpendingViewController.swift; sourceTree = "<group>"; };
+		A9A8DD572234208E00F07646 /* ReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingViewController.swift; sourceTree = "<group>"; };
+		A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyMachineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				A9A8DD242232D93A00F07646 /* AppDelegate.swift */,
-				A9A8DD262232D93A00F07646 /* ViewController.swift */,
+				A9A8DD5222341A2800F07646 /* ViewControllers */,
+				A9A8DD472232DF3500F07646 /* Utilities */,
 				A9A8DD282232D93A00F07646 /* Main.storyboard */,
 				A9A8DD2E2232D93D00F07646 /* Assets.xcassets */,
 				A9A8DD302232D93D00F07646 /* LaunchScreen.storyboard */,
@@ -97,6 +114,29 @@
 				A9A8DD3E2232D93D00F07646 /* Info.plist */,
 			);
 			path = "Money MachineTests";
+			sourceTree = "<group>";
+		};
+		A9A8DD472232DF3500F07646 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A9A8DD4E2232E27A00F07646 /* DataObjects.swift */,
+				A9A8DD4A2232DF7800F07646 /* Constants.swift */,
+				A9A8DD4C2232DF8600F07646 /* Structs.swift */,
+				A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */,
+				A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A9A8DD5222341A2800F07646 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9A8DD482232DF5500F07646 /* LoadingViewController.swift */,
+				A9A8DD502233F1D800F07646 /* LandingViewController.swift */,
+				A9A8DD552234208200F07646 /* AddingSavingSpendingViewController.swift */,
+				A9A8DD572234208E00F07646 /* ReportingViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,9 +240,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9A8DD272232D93A00F07646 /* ViewController.swift in Sources */,
 				A9A8DD2D2232D93A00F07646 /* Money_Machine.xcdatamodeld in Sources */,
+				A9A8DD5422341A6C00F07646 /* RoundShadowView.swift in Sources */,
+				A9A8DD512233F1D800F07646 /* LandingViewController.swift in Sources */,
 				A9A8DD252232D93A00F07646 /* AppDelegate.swift in Sources */,
+				A9A8DD4F2232E27A00F07646 /* DataObjects.swift in Sources */,
+				A9A8DD562234208200F07646 /* AddingSavingSpendingViewController.swift in Sources */,
+				A9A8DD5A22344B5600F07646 /* MoneyMachineViewController.swift in Sources */,
+				A9A8DD4D2232DF8600F07646 /* Structs.swift in Sources */,
+				A9A8DD492232DF5500F07646 /* LoadingViewController.swift in Sources */,
+				A9A8DD4B2232DF7800F07646 /* Constants.swift in Sources */,
+				A9A8DD582234208E00F07646 /* ReportingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,25 +7,38 @@
 //
 import UIKit
 
+import Foundation
+import UIKit
 
-
-// MARK: - Enums
-
-enum Tags: String {
-   
-    case Food = "Food"
-    case Health = "Health"
-    case Home = "Home"
-    case Tech = "Tech"
-    case Vehicle = "Vehicle"
-    case Clothes = "Clothes"
-    case Account = "Account"
-    case Other = "Other"
+struct Constants {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    static var transactionType = TransactionType.savings
+    static var expensesArray = [Transaction]()
+    static var usersArray = [UserObject]()
+    static var userIndexValue = 0
+    
+    static let spendingAlertMessage = "Please make sure to fill in all fields and select the appropriate Category."
+    static let savingsAlertMessage = "Please make sure to fill in all fields"
+    static let savingsSpendingAlertTitle = "Missing Fields"
+    static let loginAlertTitle = "Login Error"
+    static let loginAlertMessage = "Please make sure both Username and Password are filled in."
+    static let searchPlaceHolderText = "search by transaction, user, or date"
+    
+    
+    static let tagArray = [Tags.Food, Tags.Health, Tags.Home, Tags.Tech, Tags.Vehicle, Tags.Clothes, Tags.Account, Tags.Other, ]
 }
 
-enum TransactionType {
-    case spending, savings
-}
+
+
+//struct UserInfo {
+//    var userId = ""
+//    var userPass = ""
+//    var spendingMoney: Float = 300.00
+//    var savingsMoney: Float = 500.00
+//    var transactionArray: [Transaction]?
+//}
+
+
 
 
 

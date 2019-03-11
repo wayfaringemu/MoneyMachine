@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import CoreData
+import RealmSwift
 
 
 class StoredTransaction: NSManagedObject {
@@ -15,7 +16,15 @@ class StoredTransaction: NSManagedObject {
     @NSManaged var transactionArray: [Transaction]
 }
 
-class Transaction: NSObject {
+class UserObject: Object {
+    var userId: String?
+    var userPass: String?
+    var totalSavings: Float?
+    var totalSpending: Float?
+    var transactionArray: [Transaction]?
+}
+
+class Transaction: Object {
     var userID: String?
     var date: Date?
     var transactionDescription: String?
@@ -24,6 +33,23 @@ class Transaction: NSObject {
     var transactionType: TransactionType?
 }
 
+// MARK: - Enums
+
+enum Tags: String {
+    
+    case Food = "Food"
+    case Health = "Health"
+    case Home = "Home"
+    case Tech = "Tech"
+    case Vehicle = "Vehicle"
+    case Clothes = "Clothes"
+    case Account = "Account"
+    case Other = "Other"
+}
+
+enum TransactionType {
+    case spending, savings
+}
 
 extension Date {
     func stripTime(currentDate: Date) -> String {

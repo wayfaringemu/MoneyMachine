@@ -34,11 +34,9 @@ class LandingViewController: MoneyMachineViewController {
     
     // MARK: - Variables
     
-    let userInfo = UserInfo()
-
+    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
         setupView()
     }
     
@@ -47,7 +45,7 @@ class LandingViewController: MoneyMachineViewController {
         
         // Search
         searchButton.setTitle("Search", for: .normal)
-        searchTextField.placeholder =  "search by transaction, user, or date"
+        searchTextField.placeholder =  Constants.searchPlaceHolderText
 
         
         
@@ -55,7 +53,12 @@ class LandingViewController: MoneyMachineViewController {
         savingsHeaderLabel.text = "Savings"
         savingsHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
         //temporary.... make dynamic
-        savingsValueLabel.text = "$\(userInfo.savingsMoney)"
+        if let savings = currentUser.totalSavings {
+            savingsValueLabel.text = "$\(savings)"
+        } else {
+            savingsValueLabel.text = "$\(String(describing: currentUser.totalSavings))"
+        }
+//        savingsValueLabel.text = "$\(currentUser.totalSavings)"
         savingsAddButton.setTitle("Add Funds", for: .normal)
         
         
@@ -63,7 +66,12 @@ class LandingViewController: MoneyMachineViewController {
         spendingHeaderLabel.text = "Spending"
         spendingHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
         //temporary.... make dynamic
-        spendingValueLabel.text = "$\(userInfo.spendingMoney)"
+        
+        if let spending = currentUser.totalSpending {
+            spendingValueLabel.text = "$\(spending)"
+        } else {
+            spendingValueLabel.text = "$\(String(describing: currentUser.totalSpending))"
+        }
         spendingAddButton.setTitle("Add Spending", for: .normal)
 
         
@@ -86,6 +94,7 @@ class LandingViewController: MoneyMachineViewController {
     
     @objc func reportingImageTapped(gesture: UIGestureRecognizer) {
         print("go to ReportsController")
+        navigateToNextViewController(nextView: "ReportingViewController")
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {

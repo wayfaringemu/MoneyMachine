@@ -12,6 +12,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     // MARK: - Outlets
     
+ 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var headerUiView: RoundShadowView!
@@ -33,13 +34,16 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     // MARK: - Variables
     
-    let userInfo = UserInfo()
+    let userObject = UserObject()
+    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
+
     
     let buttonTitles = ["Food", "Health", "Home", "Tech", "Vehicle", "Clothes", "Account", "Other"]
     var selectedButton = 9
     var alertMessage = ""
     var valueString = ""
     var descriptionString = ""
+
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -47,6 +51,8 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     func setupView() {
         setUpNavBar()
+        headerUiView.backgroundColor = .clear; amountToAddUIView.backgroundColor = .clear; tagUIView.backgroundColor = .clear; tableViewUIView.backgroundColor = .clear; addTransactionUIView.backgroundColor = .clear;
+        
         descriptionTextField.placeholder = "description"
         valueTextField.placeholder = "$$"
         addValueButton.setTitle("Click to Add Transaction", for: .normal)
@@ -54,8 +60,11 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         switch Constants.transactionType {
         case .savings:
             headerDescriptionLabel.text = "Total Savings Amount:"
-            headerValueLabel.text = String(describing: userInfo.savingsMoney)
-            
+            if let savings = currentUser.totalSavings {
+                headerValueLabel.text = String(describing: savings)
+            } else {
+                headerValueLabel.text = String(describing: currentUser.totalSavings)
+            }
             tagUIView.removeFromSuperview()
             mainStackView.removeArrangedSubview(tagUIView)
             self.navigationItem.title = "Savings"
@@ -63,7 +72,11 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         case .spending:
             selectTagsLabel.text = "Select Category:"
             headerDescriptionLabel.text = "Total Spending Amount:"
-            headerValueLabel.text = String(describing: userInfo.spendingMoney)
+            if let spending = currentUser.totalSpending {
+                headerValueLabel.text = String(describing: spending)
+            } else {
+                headerValueLabel.text = String(describing: currentUser.totalSpending)
+            }
             headerValueLabel.textColor = .red
             
             self.navigationItem.title = "Spending"
@@ -87,7 +100,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     func addToArray() {
         let transaction = Transaction()
-        transaction.userID = "ryan"
+        transaction.userID = userObject.userId
         transaction.date = Date()
         transaction.transactionDescription = descriptionString
         transaction.transactionAmount = Float(valueString)
@@ -95,8 +108,12 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             transaction.tag = Constants.tagArray[selectedButton] as Tags
         }
         transaction.transactionType = Constants.transactionType
+//        userObject.transactionArray?.append(transaction)
         Constants.expensesArray.append(transaction)
-        self.saveData(transaction: Constants.expensesArray)
+//        self.saveData(transaction: Constants.expensesArray)
+
+//        updateUserObject()
+        
         tableView.reloadData()
     }
     
@@ -128,37 +145,33 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         switch Constants.transactionType {
         case .savings:
             if valueString.count == 0 || descriptionString.count == 0 {
-                showAlert()
+                showAlert(alertTitle: Constants.savingsSpendingAlertTitle, alertMessage: alertMessage)
             } else {
                 addToArray()
             }
         case .spending:
             if valueString.count == 0 || descriptionString.count == 0 || selectedButton > 7 {
-                showAlert()
+                showAlert(alertTitle: Constants.savingsSpendingAlertTitle, alertMessage: alertMessage)
             } else {
                 addToArray()
+                tagButtonCollection[selectedButton].backgroundColor = .white
+                tagButtonCollection[selectedButton].setTitleColor(.orange, for: .normal)
+                selectedButton = 9
             }
         }
         valueTextField.text = ""
         descriptionTextField.text = ""
-        tagButtonCollection[selectedButton].backgroundColor = .white
-        tagButtonCollection[selectedButton].setTitleColor(.orange, for: .normal)
-        selectedButton = 9
+
     }
-    
-    // MARK: - Alert
-    
-    func showAlert() {
-        let alert = UIAlertController(title: Constants.alertTitle, message: alertMessage, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
     
     // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+//        if let array = userObject.transactionArray {
+//            return array.count
+//        } else {
+//            return 0
+//        }
         return Constants.expensesArray.count
     }
     
@@ -170,16 +183,17 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             return cell
         }()
         
-        if let date = Constants.expensesArray[indexPath.row].date,
-            let transactionDescription = Constants.expensesArray[indexPath.row].transactionDescription,
-            let amount = Constants.expensesArray[indexPath.row].transactionAmount {
+            let array = Constants.expensesArray
+            if let date = array[indexPath.row].date,
+            let transactionDescription = array[indexPath.row].transactionDescription,
+            let amount = array[indexPath.row].transactionAmount {
             let amountString = String(describing: amount)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
 
             cell.textLabel?.text       = "\(date.stripTime(currentDate: date))    \(transactionDescription)"
             
-            if let tagType = Constants.expensesArray[indexPath.row].tag {
+            if let tagType = array[indexPath.row].tag {
                 cell.detailTextLabel?.text = "\(tagType.rawValue)    $\(amountString)"
             } else {
                 cell.detailTextLabel?.text = "$\(amountString)"
@@ -189,45 +203,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             cell.detailTextLabel?.text = ""
         }
         return cell
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        if let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionUITableViewCell") as? TransactionUITableViewCell,
-//                let date = Constants.expensesArray[indexPath.row].date,
-//                let transactionDescription = Constants.expensesArray[indexPath.row].transactionDescription,
-//                let amount = Constants.expensesArray[indexPath.row].transactionAmount
-//            {
-//                cell.dateLabel.text =  date.stripTime(currentDate: date)
-//                cell.descriptionLabel.text = transactionDescription
-//                let amountString = String(describing: amount)
-//                cell.amountLabel.text = "$\(amountString)"
-//                if let tagType = Constants.expensesArray[indexPath.row].tag {
-//                    cell.tagLabel?.text = tagType.rawValue
-//                    cell.tagLabel?.backgroundColor = UIColor.lightGray
-//                } else {
-//                    cell.tagLabel?.text = ""
-//                }
-//
-//                return cell
-//        }
     }
     
     
 }
-
-class TransactionUITableViewCell: UITableViewCell {
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var tagLabel: UILabel?
-    @IBOutlet weak var amountLabel: UILabel!
-
-}
-

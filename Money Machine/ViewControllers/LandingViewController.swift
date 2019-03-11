@@ -34,7 +34,7 @@ class LandingViewController: MoneyMachineViewController {
     
     // MARK: - Variables
     
-    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
+//    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -53,11 +53,11 @@ class LandingViewController: MoneyMachineViewController {
         savingsHeaderLabel.text = "Savings"
         savingsHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
         //temporary.... make dynamic
-        if let savings = currentUser.totalSavings {
-            savingsValueLabel.text = "$\(savings)"
-        } else {
-            savingsValueLabel.text = "$\(String(describing: currentUser.totalSavings))"
-        }
+//        if let savings = TempItem.savingsTotal {
+//            savingsValueLabel.text = "$\(savings)"
+//        } else {
+            savingsValueLabel.text = "$\(String(describing: TempItem.savingsTotal))"
+//        }
 //        savingsValueLabel.text = "$\(currentUser.totalSavings)"
         savingsAddButton.setTitle("Add Funds", for: .normal)
         
@@ -67,11 +67,11 @@ class LandingViewController: MoneyMachineViewController {
         spendingHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
         //temporary.... make dynamic
         
-        if let spending = currentUser.totalSpending {
-            spendingValueLabel.text = "$\(spending)"
-        } else {
-            spendingValueLabel.text = "$\(String(describing: currentUser.totalSpending))"
-        }
+//        if let spending = TempItem.spendingtotal {
+//            spendingValueLabel.text = "$\(spending)"
+//        } else {
+            spendingValueLabel.text = "$\(String(describing: TempItem.spendingtotal))"
+//        }
         spendingAddButton.setTitle("Add Spending", for: .normal)
 
         

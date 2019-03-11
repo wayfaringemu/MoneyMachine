@@ -143,8 +143,8 @@
 			children = (
 				A9A8DD4A2232DF7800F07646 /* Constants.swift */,
 				A9A8DD4E2232E27A00F07646 /* DataObjects.swift */,
-				A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */,
 				A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */,
+				A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

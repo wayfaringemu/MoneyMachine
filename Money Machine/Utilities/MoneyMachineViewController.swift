@@ -14,14 +14,11 @@ class MoneyMachineViewController: UIViewController {
     
     // MARK: - Variables
     let realm = try! Realm()
-//    var transaction: Transaction!
-//    var userObject: UserObject?
     
 //    lazy var categories: Results<Category> = { self.realm.objects(Category.self) }()
     
     
-    let context = Constants().appDelegate?.persistentContainer.viewContext
-    var transactionArray: Array<Transaction>?
+
     
     
     func addNewUserObject(object: Object) {
@@ -44,6 +41,8 @@ class MoneyMachineViewController: UIViewController {
 //            userObject.transactionArray = UserInfo().transactionArray
         }
     }
+    
+    
     
     
     // MARK: - Dismiss Keyboard
@@ -73,44 +72,61 @@ class MoneyMachineViewController: UIViewController {
     
     // MARK: - Core Data
     
-    func saveData(transaction: [Transaction]) {
+    func saveData(transaction: Transaction) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
         
-        if let appContext = context, let entity = NSEntityDescription.entity(forEntityName: "User", in: appContext) {
-            
-            let newTransaction = StoredTransaction(entity: entity, insertInto: appContext)
-            
-//            newTransaction.transactionArray = Constants.expensesArray
-            
-            do {
-                try appContext.save()
-                
-            } catch {
-                print("Failed saving")
-            }
+        let entity = NSEntityDescription.entity(forEntityName: "CDTransaction", in: context)
+        let newUser = NSManagedObject(entity: entity!, insertInto: context)
+
+        newUser.setValue(transaction.userID, forKey: "userID")
+        newUser.setValue(transaction.date, forKey: "date")
+        newUser.setValue(transaction.transactionDescription, forKey: "transactionDescription")
+        
+        // Need ton convert below to Strings
+        
+//        newUser.setValue(transaction.transactionAmount, forKey: "transactionAmount")
+        newUser.setValue(transaction.tag, forKey: "tag")
+//        newUser.setValue(transaction.transactionType, forKey: "transactionType")
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
         }
         
     }
     
+  
+    
     
     func retreiveData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
-        //request.predicate = NSPredicate(format: "age = %@", "12")
+        let context = Constants().appDelegate?.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CDTransaction")
+
         request.returnsObjectsAsFaults = false
         do {
             let result = try context?.fetch(request)
-            for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "transactionArray") as! [Transaction])
-                if let transactionArray = data.value(forKey: "transactionArray") as? [Transaction] {
-//                    Constants.expensesArray = transactionArray
-                }
-                
-            }
             
+            if let array = result as? [Transaction] {
+                TempItem.transactionArray = array
+            }
+            for transaction in TempItem.transactionArray {
+                print("transaction for \(String(describing: transaction.userID))")
+            }
         } catch {
             
             print("Failed")
         }
     }
-    
-    
 }
+
+extension Date {
+    func stripTime(currentDate: Date) -> String {
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString:String = dateFormatter.string(from: currentDate as Date)
+        
+        return dateString
+    }
+}
+

@@ -34,8 +34,8 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     // MARK: - Variables
     
-    let userObject = UserObject()
-    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
+//    let userObject = UserObject()
+//    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
 
     
     let buttonTitles = ["Food", "Health", "Home", "Tech", "Vehicle", "Clothes", "Account", "Other"]
@@ -49,6 +49,8 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         setupView()
     }
     
+    // MARK: - UI Setup
+    
     func setupView() {
         setUpNavBar()
         headerUiView.backgroundColor = .clear; amountToAddUIView.backgroundColor = .clear; tagUIView.backgroundColor = .clear; tableViewUIView.backgroundColor = .clear; addTransactionUIView.backgroundColor = .clear;
@@ -56,15 +58,11 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         descriptionTextField.placeholder = "description"
         valueTextField.placeholder = "$$"
         addValueButton.setTitle("Click to Add Transaction", for: .normal)
-
+        
         switch Constants.transactionType {
         case .savings:
             headerDescriptionLabel.text = "Total Savings Amount:"
-            if let savings = currentUser.totalSavings {
-                headerValueLabel.text = String(describing: savings)
-            } else {
-                headerValueLabel.text = String(describing: currentUser.totalSavings)
-            }
+            headerValueLabel.text = String(describing: TempItem.savingsTotal)
             tagUIView.removeFromSuperview()
             mainStackView.removeArrangedSubview(tagUIView)
             self.navigationItem.title = "Savings"
@@ -72,11 +70,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         case .spending:
             selectTagsLabel.text = "Select Category:"
             headerDescriptionLabel.text = "Total Spending Amount:"
-            if let spending = currentUser.totalSpending {
-                headerValueLabel.text = String(describing: spending)
-            } else {
-                headerValueLabel.text = String(describing: currentUser.totalSpending)
-            }
+            headerValueLabel.text = String(describing: TempItem.spendingtotal)
             headerValueLabel.textColor = .red
             
             self.navigationItem.title = "Spending"
@@ -98,23 +92,45 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         self.navigationController?.view.tintColor = UIColor.orange
     }
     
+    // MARK: - Logic
+    
     func addToArray() {
         let transaction = Transaction()
-        transaction.userID = userObject.userId
-        transaction.date = Date()
-        transaction.transactionDescription = descriptionString
-        transaction.transactionAmount = Float(valueString)
-        if Constants.transactionType == .spending {
-            transaction.tag = Constants.tagArray[selectedButton] as Tags
+        if let value = Float(valueString) {
+            transaction.userID = TempItem.user
+            transaction.date = Date()
+            transaction.transactionDescription = descriptionString
+            transaction.transactionAmount = value
+            if Constants.transactionType == .spending {
+                transaction.tag = Constants.tagArray[selectedButton] as Tags
+                TempItem.spendingArray.insert(value, at: 0)
+                
+            } else {
+                TempItem.savingsArray.insert(value, at: 0)
+                
+            }
+            transaction.transactionType = Constants.transactionType
+            
+            TempItem.transactionArray.append(transaction)
+            
+            updateTotalExpenditures()
+            
+            
+            self.saveData(transaction: transaction)
+            
+            
+            tableView.reloadData()
         }
-        transaction.transactionType = Constants.transactionType
-//        userObject.transactionArray?.append(transaction)
-        Constants.expensesArray.append(transaction)
-//        self.saveData(transaction: Constants.expensesArray)
-
-//        updateUserObject()
+    }
+    
+    func  updateTotalExpenditures() {
+        for amount in TempItem.savingsArray {
+            TempItem.savingsTotal += amount
+        }
         
-        tableView.reloadData()
+        for amount in TempItem.spendingArray {
+            TempItem.spendingtotal += amount
+        }
     }
     
     // MARK: - Actions
@@ -167,11 +183,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let array = userObject.transactionArray {
-//            return array.count
-//        } else {
-//            return 0
-//        }
+
         return Constants.expensesArray.count
     }
     

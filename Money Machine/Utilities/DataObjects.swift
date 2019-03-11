@@ -12,8 +12,13 @@ import RealmSwift
 
 
 class StoredTransaction: NSManagedObject {
-    //    @NSManaged var values: [Dictionary<String , Any>]
-    @NSManaged var transactionArray: [Transaction]
+    @NSManaged var coreDataTransaction: Transaction
+    @NSManaged var userID: String?
+    @NSManaged var date: Date?
+    @NSManaged var transactionDescription: String?
+//    @NSManaged var transactionAmount: Float?
+    @NSManaged var tag: Tags.RawValue?
+//    @NSManaged var transactionType: TransactionType?
 }
 
 class UserObject: Object {
@@ -49,15 +54,5 @@ enum Tags: String {
 
 enum TransactionType {
     case spending, savings
-}
-
-extension Date {
-    func stripTime(currentDate: Date) -> String {
-        let dateFormatter:DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString:String = dateFormatter.string(from: currentDate as Date)
-        
-        return dateString
-    }
 }
 

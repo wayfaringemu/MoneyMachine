@@ -9,9 +9,9 @@
 import UIKit
 
 class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     // MARK: - Outlets
-
+    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var reportingMainUIView: RoundShadowView!
     @IBOutlet weak var searchUIView: RoundShadowView!
@@ -21,14 +21,7 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     
     // MARK: - Variables
     let userObject = UserObject()
-
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         setupView()
     }
@@ -48,15 +41,10 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let array = userObject.transactionArray {
-//            return array.count
-//        } else {
-//            return 0
-//        }
-        return Constants.expensesArray.count
+        return TempItem.transactionArray.count
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = {
@@ -66,15 +54,16 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
             return cell
         }()
         
-            let array = Constants.expensesArray
-            if let date = array[indexPath.row].date,
+        let array = TempItem.transactionArray
+        if let date = array[indexPath.row].date,
+            let user = array[indexPath.row].userID,
             let transactionDescription = array[indexPath.row].transactionDescription,
             let amount = array[indexPath.row].transactionAmount {
             let amountString = String(describing: amount)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
             
-            cell.textLabel?.text       = "\(date.stripTime(currentDate: date))    \(transactionDescription)"
+            cell.textLabel?.text       = "\(date.stripTime(currentDate: date))  \(user)   \(transactionDescription)"
             
             if let tagType = array[indexPath.row].tag {
                 cell.detailTextLabel?.text = "\(tagType.rawValue)    $\(amountString)"

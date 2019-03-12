@@ -21,7 +21,6 @@
 		A9A8DD562234208200F07646 /* AddingSavingSpendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD552234208200F07646 /* AddingSavingSpendingViewController.swift */; };
 		A9A8DD582234208E00F07646 /* ReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD572234208E00F07646 /* ReportingViewController.swift */; };
 		A9A8DD5A22344B5600F07646 /* MoneyMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */; };
-		FC326F39DE5496145452A67C /* Pods_Money_Machine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC6EE4CBB526947F1E232B1 /* Pods_Money_Machine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC326F39DE5496145452A67C /* Pods_Money_Machine.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +169,6 @@
 				A9A8DD1D2232D93A00F07646 /* Sources */,
 				A9A8DD1E2232D93A00F07646 /* Frameworks */,
 				A9A8DD1F2232D93A00F07646 /* Resources */,
-				71E5AD3EDAEF093232829F19 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,30 +276,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		71E5AD3EDAEF093232829F19 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Money Machine/Pods-Money Machine-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Money Machine/Pods-Money Machine-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

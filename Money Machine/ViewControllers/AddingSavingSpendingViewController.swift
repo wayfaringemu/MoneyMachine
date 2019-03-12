@@ -12,7 +12,6 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     // MARK: - Outlets
     
- 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var headerUiView: RoundShadowView!
@@ -34,16 +33,12 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     
     // MARK: - Variables
     
-//    let userObject = UserObject()
-//    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
-
-    
     let buttonTitles = ["Food", "Health", "Home", "Tech", "Vehicle", "Clothes", "Account", "Other"]
     var selectedButton = 9
     var alertMessage = ""
     var valueString = ""
     var descriptionString = ""
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -77,8 +72,6 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             alertMessage = Constants.spendingAlertMessage
             setupButtons()
         }
-        
-        
     }
     
     func setupButtons() {
@@ -95,41 +88,53 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
     // MARK: - Logic
     
     func addToArray() {
-        let transaction = Transaction()
+        //Construct data dict
+        
         if let value = Float(valueString) {
-            transaction.userID = TempItem.user
-            transaction.date = Date()
-            transaction.transactionDescription = descriptionString
-            transaction.transactionAmount = value
+            let userID = TempItem.user
+            let date = Date()
+            let transactionDescription = descriptionString
+            let transactionAmount = value
+            var transactionType = ""
+            var tag = ""
             if Constants.transactionType == .spending {
-                transaction.tag = Constants.tagArray[selectedButton] as Tags
+                tag = Constants.tagArray[selectedButton].rawValue
                 TempItem.spendingArray.insert(value, at: 0)
-                
+                updateTotalExpenditures(savings: nil, spending: value)
+                headerValueLabel.text = String(describing: TempItem.spendingtotal)
+                transactionType = "spending"
             } else {
+                tag = "Savings"
                 TempItem.savingsArray.insert(value, at: 0)
-                
+                updateTotalExpenditures(savings: value, spending: nil)
+                headerValueLabel.text = String(describing: TempItem.savingsTotal)
+                transactionType = "savings"
             }
-            transaction.transactionType = Constants.transactionType
+            let dict = ["userID":userID, "date":date, "transactionDescription":transactionDescription, "transactionAmount":transactionAmount, "transactionType":transactionType, "tag":tag ] as [String : Any] as NSDictionary
             
-            TempItem.transactionArray.append(transaction)
+            // Store in Defaults
             
-            updateTotalExpenditures()
+            let storedItemCount = defaults.integer(forKey: "count")
+            let count = storedItemCount + 1
+            defaults.set(count, forKey: "count")
             
+            defaults.set(dict, forKey: String(count))
             
-            self.saveData(transaction: transaction)
+            //Set as Object
+            let transaction = Transaction(dictionary: dict)
+            TempItem.transactionArray.insert(transaction, at: 0)
             
-            
-            tableView.reloadData()
-        }
-    }
-    
-    func  updateTotalExpenditures() {
-        for amount in TempItem.savingsArray {
-            TempItem.savingsTotal += amount
         }
         
-        for amount in TempItem.spendingArray {
-            TempItem.spendingtotal += amount
+        tableView.reloadData()
+    }
+    
+    func  updateTotalExpenditures(savings: Float?, spending:Float?) {
+        if let savingsAmt = savings {
+            TempItem.savingsTotal += savingsAmt
+        }
+        if let spendingAmt = spending {
+            TempItem.spendingtotal += spendingAmt
         }
     }
     
@@ -177,14 +182,14 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         }
         valueTextField.text = ""
         descriptionTextField.text = ""
-
+        
     }
     
     // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return Constants.expensesArray.count
+        
+        return TempItem.transactionArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,18 +200,18 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             return cell
         }()
         
-            let array = Constants.expensesArray
-            if let date = array[indexPath.row].date,
+        let array = TempItem.transactionArray
+        if let date = array[indexPath.row].date,
             let transactionDescription = array[indexPath.row].transactionDescription,
             let amount = array[indexPath.row].transactionAmount {
             let amountString = String(describing: amount)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
-
+            
             cell.textLabel?.text       = "\(date.stripTime(currentDate: date))    \(transactionDescription)"
             
             if let tagType = array[indexPath.row].tag {
-                cell.detailTextLabel?.text = "\(tagType.rawValue)    $\(amountString)"
+                cell.detailTextLabel?.text = "\(tagType)    $\(amountString)"
             } else {
                 cell.detailTextLabel?.text = "$\(amountString)"
             }

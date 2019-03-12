@@ -34,8 +34,6 @@ class LandingViewController: MoneyMachineViewController {
     
     // MARK: - Variables
     
-//    let currentUser = Constants.usersArray[Constants.userIndexValue] as UserObject
-    
     override func viewWillAppear(_ animated: Bool) {
         setupView()
     }
@@ -46,34 +44,18 @@ class LandingViewController: MoneyMachineViewController {
         // Search
         searchButton.setTitle("Search", for: .normal)
         searchTextField.placeholder =  Constants.searchPlaceHolderText
-
-        
         
         // Savings
         savingsHeaderLabel.text = "Savings"
         savingsHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        //temporary.... make dynamic
-//        if let savings = TempItem.savingsTotal {
-//            savingsValueLabel.text = "$\(savings)"
-//        } else {
-            savingsValueLabel.text = "$\(String(describing: TempItem.savingsTotal))"
-//        }
-//        savingsValueLabel.text = "$\(currentUser.totalSavings)"
+        savingsValueLabel.text = "$\(String(describing: TempItem.savingsTotal))"
         savingsAddButton.setTitle("Add Funds", for: .normal)
-        
         
         // Spending
         spendingHeaderLabel.text = "Spending"
         spendingHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        //temporary.... make dynamic
-        
-//        if let spending = TempItem.spendingtotal {
-//            spendingValueLabel.text = "$\(spending)"
-//        } else {
-            spendingValueLabel.text = "$\(String(describing: TempItem.spendingtotal))"
-//        }
+        spendingValueLabel.text = "$\(String(describing: TempItem.spendingtotal))"
         spendingAddButton.setTitle("Add Spending", for: .normal)
-
         
         // Reporting
         reportingImageView.image = UIImage.init(named: "reportIcon")
@@ -84,21 +66,65 @@ class LandingViewController: MoneyMachineViewController {
         reportingImageView.addGestureRecognizer(tapGesture)
         reportingImageView.isUserInteractionEnabled = true
     }
-
-    
-    // MARK: - Navigation
-    
     
     // MARK: - Actions
-
+    
     
     @objc func reportingImageTapped(gesture: UIGestureRecognizer) {
-        print("go to ReportsController")
         navigateToNextViewController(nextView: "ReportingViewController")
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        
+        TempItem.searchArray.removeAll()
+        if let textToSearch = searchTextField.text {
+            for transaction: Transaction in TempItem.transactionArray {
+                if let date = transaction.date,
+                    let user = transaction.userID,
+                    let tag = transaction.tag,
+                    let amount = transaction.transactionAmount,
+                    let descrip = transaction.transactionDescription,
+                    let type = transaction.transactionType {
+                    
+                    var match = false
+                    if let _ = user.range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                    }
+                    if let _ = String(date.stripTime(currentDate: date)).range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                        
+                    }
+                    if let _ = amount.description.range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                        
+                    }
+                    if let _ = descrip.range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                        
+                    }
+                    if let _ = type.range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                        
+                    }
+                    if let _ = tag.range(of: textToSearch, options: .caseInsensitive) {
+                        match = true
+                    }
+                    if match == true {
+                        TempItem.searchArray.append(transaction)
+                    }
+                }
+            }
+            if TempItem.searchArray.count > 0 {
+                if let VC1 = self.storyboard?.instantiateViewController(withIdentifier: "ReportingViewController") as? ReportingViewController  {
+                    let navController = UINavigationController(rootViewController: VC1)
+                    VC1.classPurporse = "Search"
+                    VC1.contextualArray = TempItem.searchArray
+                    searchTextField.text = ""
+                    self.present(navController, animated:true, completion: nil)
+                }
+            } else {
+                showAlert(alertTitle: "Search Error", alertMessage: "The item you were looking for could not be found")
+            }
+        }
     }
     
     @IBAction func savingaAddButtonTapped(_ sender: UIButton) {
@@ -108,6 +134,4 @@ class LandingViewController: MoneyMachineViewController {
     @IBAction func spendingAddButtonTapped(_ sender: UIButton) {
         Constants.transactionType = .spending
     }
-   
-    
 }

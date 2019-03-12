@@ -545,21 +545,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Osa-A3-iP2" customClass="RoundShadowView" customModule="Money_Machine" customModuleProvider="target">
-                                <rect key="frame" x="16" y="80" width="343" height="54"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsO-rS-pUs">
-                                        <rect key="frame" x="8" y="12" width="327" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDX-th-Dbz" customClass="RoundShadowView" customModule="Money_Machine" customModuleProvider="target">
-                                <rect key="frame" x="16" y="150" width="343" height="501"/>
+                                <rect key="frame" x="16" y="86" width="343" height="565"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zfk-om-pZm">
                                         <rect key="frame" x="8" y="8" width="327" height="485"/>
@@ -599,7 +586,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="zfk-om-pZm" firstAttribute="top" secondItem="dDX-th-Dbz" secondAttribute="top" constant="8" id="8Ij-gE-gbn"/>
-                                    <constraint firstAttribute="bottom" secondItem="zfk-om-pZm" secondAttribute="bottom" constant="8" id="f31-Xp-5hF"/>
+                                    <constraint firstAttribute="bottom" secondItem="zfk-om-pZm" secondAttribute="bottom" constant="72" id="f31-Xp-5hF"/>
                                     <constraint firstItem="zfk-om-pZm" firstAttribute="leading" secondItem="dDX-th-Dbz" secondAttribute="leading" constant="8" id="pPf-oh-nAK"/>
                                     <constraint firstAttribute="trailing" secondItem="zfk-om-pZm" secondAttribute="trailing" constant="8" id="riE-QS-tU2"/>
                                 </constraints>
@@ -607,14 +594,10 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="7D5-nd-keW" firstAttribute="trailing" secondItem="Osa-A3-iP2" secondAttribute="trailing" constant="16" id="L41-w3-eVi"/>
                             <constraint firstItem="7D5-nd-keW" firstAttribute="trailing" secondItem="dDX-th-Dbz" secondAttribute="trailing" constant="16" id="VZ3-eI-4Ur"/>
                             <constraint firstItem="dDX-th-Dbz" firstAttribute="leading" secondItem="7D5-nd-keW" secondAttribute="leading" constant="16" id="d9t-WR-cu1"/>
-                            <constraint firstItem="Osa-A3-iP2" firstAttribute="top" secondItem="7D5-nd-keW" secondAttribute="top" constant="16" id="hEi-GM-jVo"/>
-                            <constraint firstItem="dDX-th-Dbz" firstAttribute="top" secondItem="Osa-A3-iP2" secondAttribute="bottom" constant="16" id="jsF-WU-s3b"/>
                             <constraint firstItem="7D5-nd-keW" firstAttribute="bottom" secondItem="dDX-th-Dbz" secondAttribute="bottom" constant="16" id="mnA-02-oB8"/>
-                            <constraint firstItem="Osa-A3-iP2" firstAttribute="leading" secondItem="7D5-nd-keW" secondAttribute="leading" constant="16" id="ojf-8b-DCU"/>
-                            <constraint firstItem="dDX-th-Dbz" firstAttribute="top" secondItem="7D5-nd-keW" secondAttribute="top" constant="86" id="zcA-T1-QJf"/>
+                            <constraint firstItem="dDX-th-Dbz" firstAttribute="top" secondItem="7D5-nd-keW" secondAttribute="top" constant="22" id="zcA-T1-QJf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7D5-nd-keW"/>
                     </view>
@@ -633,8 +616,6 @@
                     <connections>
                         <outlet property="backButton" destination="RNt-fz-8yd" id="YsJ-YN-Tx3"/>
                         <outlet property="reportingMainUIView" destination="dDX-th-Dbz" id="TFO-K9-lqD"/>
-                        <outlet property="searchTextView" destination="dsO-rS-pUs" id="bWl-4Z-74i"/>
-                        <outlet property="searchUIView" destination="Osa-A3-iP2" id="e5G-sp-JGO"/>
                         <outlet property="tableView" destination="zfk-om-pZm" id="yC9-x5-Cwi"/>
                     </connections>
                 </viewController>

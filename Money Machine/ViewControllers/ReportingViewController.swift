@@ -15,22 +15,21 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var reportingMainUIView: RoundShadowView!
     @IBOutlet weak var searchUIView: RoundShadowView!
-    @IBOutlet weak var searchTextView: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Variables
-    let userObject = UserObject()
+    var classPurporse = "Report"
+    var contextualArray = TempItem.transactionArray
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
     }
     
     func setupView() {
-        reportingMainUIView.backgroundColor = .clear; searchUIView.backgroundColor = .clear
-        searchTextView.placeholder = Constants.searchPlaceHolderText
+        reportingMainUIView.backgroundColor = .clear
         backButton.setTitle("Back", for: .normal)
-        
+        self.title = classPurporse
     }
     
     
@@ -41,10 +40,8 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     // MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TempItem.transactionArray.count
+        return contextualArray.count
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = {
@@ -54,7 +51,7 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
             return cell
         }()
         
-        let array = TempItem.transactionArray
+        let array = contextualArray
         if let date = array[indexPath.row].date,
             let user = array[indexPath.row].userID,
             let transactionDescription = array[indexPath.row].transactionDescription,
@@ -66,7 +63,7 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
             cell.textLabel?.text       = "\(date.stripTime(currentDate: date))  \(user)   \(transactionDescription)"
             
             if let tagType = array[indexPath.row].tag {
-                cell.detailTextLabel?.text = "\(tagType.rawValue)    $\(amountString)"
+                cell.detailTextLabel?.text = "\(tagType)    $\(amountString)"
             } else {
                 cell.detailTextLabel?.text = "$\(amountString)"
             }

@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import RealmSwift
 
 class LoadingViewController: MoneyMachineViewController {
     
@@ -19,13 +18,18 @@ class LoadingViewController: MoneyMachineViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
-    var searchResults = try! Realm().objects(UserObject.self)
-    var searchController: UISearchController!
-    var users = try! Realm().objects(UserObject.self).sorted(byKeyPath: "userId", ascending: true)
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        let storedCount = defaults.integer(forKey: "count")
+        for i in 1...storedCount {
+            if let dict = defaults.dictionary(forKey: String(i)) {
+                let transaction = Transaction(dictionary: dict as NSDictionary)
+                TempItem.transactionArray.append(transaction)
+            }
+        }
     }
     
     func setupView() {
@@ -37,16 +41,17 @@ class LoadingViewController: MoneyMachineViewController {
     
     func setTempArrayData() {
         for transaction in TempItem.transactionArray {
+            
             switch transaction.transactionType {
-            case .savings?:
+            case "savings":
                 if let amount = transaction.transactionAmount {
-                TempItem.savingsArray.insert(amount, at: 0)
+                    TempItem.savingsArray.insert(amount, at: 0)
                 }
-            case .spending?:
+            case "spending":
                 if let amount = transaction.transactionAmount {
                     TempItem.spendingArray.insert(amount, at: 0)
                 }
-            case .none:
+            default:
                 break
             }
         }
@@ -55,7 +60,7 @@ class LoadingViewController: MoneyMachineViewController {
     
     func  getTotalExpenditures() {
         for amount in TempItem.savingsArray {
-          TempItem.savingsTotal += amount
+            TempItem.savingsTotal += amount
         }
         
         for amount in TempItem.spendingArray {
@@ -85,7 +90,6 @@ class LoadingViewController: MoneyMachineViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         if let userText = usernameTextField.text, userText.count > 0 {
             TempItem.user = userText
-            retreiveData()
             setTempArrayData()
         } else {
             showAlert(alertTitle: Constants.loginAlertTitle, alertMessage: Constants.loginAlertMessage)

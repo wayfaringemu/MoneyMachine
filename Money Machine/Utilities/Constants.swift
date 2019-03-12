@@ -6,16 +6,11 @@
 //  Copyright © 2019 ryan kowalski. All rights reserved.
 //
 import UIKit
-
 import Foundation
-import UIKit
 
 struct Constants {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     static var transactionType = TransactionType.savings
-    static var expensesArray = [Transaction]()
-    static var usersArray = [UserObject]()
-    static var userIndexValue = 0
     
     static let spendingAlertMessage = "Please make sure to fill in all fields and select the appropriate Category."
     static let savingsAlertMessage = "Please make sure to fill in all fields"
@@ -35,6 +30,8 @@ struct TempItem {
     static var transactionArray = [Transaction]()
     static var savingsTotal: Float = 0.00
     static var spendingtotal: Float = 0.00
+    static var storedArray = Array<[String:Any]>()
+    static var searchArray = [Transaction]()
 }
 
 

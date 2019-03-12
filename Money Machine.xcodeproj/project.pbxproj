@@ -15,7 +15,6 @@
 		A9A8DD3D2232D93D00F07646 /* Money_MachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD3C2232D93D00F07646 /* Money_MachineTests.swift */; };
 		A9A8DD492232DF5500F07646 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD482232DF5500F07646 /* LoadingViewController.swift */; };
 		A9A8DD4B2232DF7800F07646 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4A2232DF7800F07646 /* Constants.swift */; };
-		A9A8DD4D2232DF8600F07646 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4C2232DF8600F07646 /* Structs.swift */; };
 		A9A8DD4F2232E27A00F07646 /* DataObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD4E2232E27A00F07646 /* DataObjects.swift */; };
 		A9A8DD512233F1D800F07646 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD502233F1D800F07646 /* LandingViewController.swift */; };
 		A9A8DD5422341A6C00F07646 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */; };
@@ -35,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B51F5CE0DC40B2CD94E91C4 /* Pods-Money Machine.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Money Machine.release.xcconfig"; path = "Pods/Target Support Files/Pods-Money Machine/Pods-Money Machine.release.xcconfig"; sourceTree = "<group>"; };
+		8DD6E037B826B02994FEB3B8 /* Pods-Money Machine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Money Machine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Money Machine/Pods-Money Machine.debug.xcconfig"; sourceTree = "<group>"; };
 		A9A8DD212232D93A00F07646 /* Money Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A8DD242232D93A00F07646 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9A8DD292232D93A00F07646 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,13 +48,13 @@
 		A9A8DD3E2232D93D00F07646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9A8DD482232DF5500F07646 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		A9A8DD4A2232DF7800F07646 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A9A8DD4C2232DF8600F07646 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		A9A8DD4E2232E27A00F07646 /* DataObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataObjects.swift; sourceTree = "<group>"; };
 		A9A8DD502233F1D800F07646 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
 		A9A8DD552234208200F07646 /* AddingSavingSpendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingSavingSpendingViewController.swift; sourceTree = "<group>"; };
 		A9A8DD572234208E00F07646 /* ReportingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingViewController.swift; sourceTree = "<group>"; };
 		A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyMachineViewController.swift; sourceTree = "<group>"; };
+		EBC6EE4CBB526947F1E232B1 /* Pods_Money_Machine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Money_Machine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +75,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28A6BAEEA8692F94960B73EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8DD6E037B826B02994FEB3B8 /* Pods-Money Machine.debug.xcconfig */,
+				3B51F5CE0DC40B2CD94E91C4 /* Pods-Money Machine.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7130375F82EFFD928EF55B62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBC6EE4CBB526947F1E232B1 /* Pods_Money_Machine.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A9A8DD182232D93A00F07646 = {
 			isa = PBXGroup;
 			children = (
 				A9A8DD232232D93A00F07646 /* Money Machine */,
 				A9A8DD3B2232D93D00F07646 /* Money MachineTests */,
 				A9A8DD222232D93A00F07646 /* Products */,
+				28A6BAEEA8692F94960B73EF /* Pods */,
+				7130375F82EFFD928EF55B62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,11 +139,10 @@
 		A9A8DD472232DF3500F07646 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				A9A8DD4E2232E27A00F07646 /* DataObjects.swift */,
 				A9A8DD4A2232DF7800F07646 /* Constants.swift */,
-				A9A8DD4C2232DF8600F07646 /* Structs.swift */,
-				A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */,
+				A9A8DD4E2232E27A00F07646 /* DataObjects.swift */,
 				A9A8DD5922344B5600F07646 /* MoneyMachineViewController.swift */,
+				A9A8DD5322341A6C00F07646 /* RoundShadowView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -146,6 +165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A9A8DD412232D93D00F07646 /* Build configuration list for PBXNativeTarget "Money Machine" */;
 			buildPhases = (
+				26EF3E0B12E1147202D62475 /* [CP] Check Pods Manifest.lock */,
 				A9A8DD1D2232D93A00F07646 /* Sources */,
 				A9A8DD1E2232D93A00F07646 /* Frameworks */,
 				A9A8DD1F2232D93A00F07646 /* Resources */,
@@ -235,6 +255,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		26EF3E0B12E1147202D62475 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Money Machine-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A9A8DD1D2232D93A00F07646 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -247,7 +292,6 @@
 				A9A8DD4F2232E27A00F07646 /* DataObjects.swift in Sources */,
 				A9A8DD562234208200F07646 /* AddingSavingSpendingViewController.swift in Sources */,
 				A9A8DD5A22344B5600F07646 /* MoneyMachineViewController.swift in Sources */,
-				A9A8DD4D2232DF8600F07646 /* Structs.swift in Sources */,
 				A9A8DD492232DF5500F07646 /* LoadingViewController.swift in Sources */,
 				A9A8DD4B2232DF7800F07646 /* Constants.swift in Sources */,
 				A9A8DD582234208E00F07646 /* ReportingViewController.swift in Sources */,
@@ -410,6 +454,7 @@
 		};
 		A9A8DD422232D93D00F07646 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DD6E037B826B02994FEB3B8 /* Pods-Money Machine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -428,6 +473,7 @@
 		};
 		A9A8DD432232D93D00F07646 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B51F5CE0DC40B2CD94E91C4 /* Pods-Money Machine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

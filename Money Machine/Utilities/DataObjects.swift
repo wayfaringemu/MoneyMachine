@@ -7,31 +7,47 @@
 
 import UIKit
 import Foundation
-import CoreData
 
-
-class StoredTransaction: NSManagedObject {
-    //    @NSManaged var values: [Dictionary<String , Any>]
-    @NSManaged var transactionArray: [Transaction]
+class UserObject: NSObject {
+    var userId: String?
+    var userPass: String?
+    var totalSavings: Float?
+    var totalSpending: Float?
+    var transactionArray: [Transaction]?
 }
 
-class Transaction: NSObject {
+class Transaction {
     var userID: String?
     var date: Date?
     var transactionDescription: String?
     var transactionAmount: Float?
-    var tag: Tags?
-    var transactionType: TransactionType?
-}
-
-
-extension Date {
-    func stripTime(currentDate: Date) -> String {
-        let dateFormatter:DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString:String = dateFormatter.string(from: currentDate as Date)
-        
-        return dateString
+    var tag: String?
+    var transactionType: String?
+    
+    init(dictionary: NSDictionary) {
+        userID = dictionary["userID"] as? String
+        date = dictionary["date"] as? Date
+        transactionDescription = dictionary["transactionDescription"] as? String
+        transactionAmount = dictionary["transactionAmount"] as? Float
+        tag = dictionary["tag"] as? String
+        transactionType = dictionary["transactionType"] as? String
     }
 }
 
+// MARK: - Enums
+
+enum Tags: String {
+    case Food = "Food"
+    case Health = "Health"
+    case Home = "Home"
+    case Tech = "Tech"
+    case Vehicle = "Vehicle"
+    case Clothes = "Clothes"
+    case Account = "Account"
+    case Other = "Other"
+    case Savings = "Savings"
+}
+
+enum TransactionType: String {
+    case spending, savings
+}

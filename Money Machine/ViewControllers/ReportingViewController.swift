@@ -55,10 +55,18 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
         if let date = array[indexPath.row].date,
             let user = array[indexPath.row].userID,
             let transactionDescription = array[indexPath.row].transactionDescription,
-            let amount = array[indexPath.row].transactionAmount {
-            let amountString = String(describing: amount)
+            let amount = array[indexPath.row].transactionAmount,
+            let type = array[indexPath.row].transactionType {
+            let amountString = String(format: "%.2f", amount)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+            if type == "spending" {
+                cell.detailTextLabel?.textColor = .red
+            } else {
+                cell.detailTextLabel?.textColor = .black
+
+            }
+            
             
             cell.textLabel?.text       = "\(date.stripTime(currentDate: date))  \(user)   \(transactionDescription)"
             

@@ -48,13 +48,13 @@ class LandingViewController: MoneyMachineViewController {
         // Savings
         savingsHeaderLabel.text = "Savings"
         savingsHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        savingsValueLabel.text = "$\(String(describing: TempItem.savingsTotal))"
+        savingsValueLabel.text = "$\(String(format: "%.2f", TempItem.savingsTotal))"
         savingsAddButton.setTitle("Add Funds", for: .normal)
         
         // Spending
         spendingHeaderLabel.text = "Spending"
         spendingHeaderLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        spendingValueLabel.text = "$\(String(describing: TempItem.spendingtotal))"
+        spendingValueLabel.text = "$\(String(format: "%.2f", TempItem.spendingtotal))"
         spendingAddButton.setTitle("Add Spending", for: .normal)
         
         // Reporting

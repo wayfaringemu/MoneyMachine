@@ -57,7 +57,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         switch Constants.transactionType {
         case .savings:
             headerDescriptionLabel.text = "Total Savings Amount:"
-            headerValueLabel.text = String(describing: TempItem.savingsTotal)
+            headerValueLabel.text =  String(format: "%.2f", TempItem.savingsTotal)
             tagUIView.removeFromSuperview()
             mainStackView.removeArrangedSubview(tagUIView)
             self.navigationItem.title = "Savings"
@@ -65,7 +65,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         case .spending:
             selectTagsLabel.text = "Select Category:"
             headerDescriptionLabel.text = "Total Spending Amount:"
-            headerValueLabel.text = String(describing: TempItem.spendingtotal)
+            headerValueLabel.text = String(format: "%.2f", TempItem.spendingtotal)
             headerValueLabel.textColor = .red
             
             self.navigationItem.title = "Spending"
@@ -101,13 +101,13 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
                 tag = Constants.tagArray[selectedButton].rawValue
                 TempItem.spendingArray.insert(value, at: 0)
                 updateTotalExpenditures(savings: nil, spending: value)
-                headerValueLabel.text = String(describing: TempItem.spendingtotal)
+                headerValueLabel.text = String(format: "%.2f", TempItem.spendingtotal)
                 transactionType = "spending"
             } else {
                 tag = "Savings"
                 TempItem.savingsArray.insert(value, at: 0)
                 updateTotalExpenditures(savings: value, spending: nil)
-                headerValueLabel.text = String(describing: TempItem.savingsTotal)
+                headerValueLabel.text = String(format: "%.2f", TempItem.savingsTotal)
                 transactionType = "savings"
             }
             let dict = ["userID":userID, "date":date, "transactionDescription":transactionDescription, "transactionAmount":transactionAmount, "transactionType":transactionType, "tag":tag ] as [String : Any] as NSDictionary
@@ -204,7 +204,7 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         if let date = array[indexPath.row].date,
             let transactionDescription = array[indexPath.row].transactionDescription,
             let amount = array[indexPath.row].transactionAmount {
-            let amountString = String(describing: amount)
+            let amountString = String(format: "%.2f", amount)
             cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
             

@@ -41,7 +41,6 @@ class LoadingViewController: MoneyMachineViewController {
     
     func setTempArrayData() {
         for transaction in TempItem.transactionArray {
-            
             switch transaction.transactionType {
             case "savings":
                 if let amount = transaction.transactionAmount {

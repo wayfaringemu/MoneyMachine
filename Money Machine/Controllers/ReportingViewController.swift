@@ -76,5 +76,17 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
         return UITableViewCell()
     }
     
+    // Adding swipe to delete:
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+        }
+    }
+    
 }
 

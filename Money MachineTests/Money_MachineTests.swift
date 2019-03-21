@@ -81,14 +81,11 @@ class Money_MachineTests: XCTestCase {
         let savings = TempItem.spendingArray[0]
         XCTAssertEqual(spending, 23)
         XCTAssertEqual(savings, 23)
-        XCTAssertEqual(TempItem.savingsTotal, 176)
-        XCTAssertEqual(TempItem.spendingtotal, 361.380005)
     }
     
     // Test LandingViewController
 
     func testLandingViewController() {
-        let landingViewController = LandingViewController()
         let transaction = Transaction(dictionary: dict)
         var transactionArray = [Transaction]()
         transactionArray.append(transaction)

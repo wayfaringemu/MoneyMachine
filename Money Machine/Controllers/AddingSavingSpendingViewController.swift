@@ -124,13 +124,13 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
             if valueString.count == 0 || descriptionString.count == 0 {
                 showAlert(alertTitle: Constants.savingsSpendingAlertTitle, alertMessage: alertMessage)
             } else {
-                headerValueLabel.text = model.setArray(valueString: valueString, descriptionString: descriptionString, selectedButton: selectedButton)
+                headerValueLabel.text = model.addToArrayAndDefaults(valueString: valueString, descriptionString: descriptionString, selectedButton: selectedButton)
             }
         case .spending:
             if valueString.count == 0 || descriptionString.count == 0 || selectedButton > 7 {
                 showAlert(alertTitle: Constants.savingsSpendingAlertTitle, alertMessage: alertMessage)
             } else {
-                headerValueLabel.text = model.setArray(valueString: valueString, descriptionString: descriptionString, selectedButton: selectedButton)
+                headerValueLabel.text = model.addToArrayAndDefaults(valueString: valueString, descriptionString: descriptionString, selectedButton: selectedButton)
                 deselectButton(selectedButton: selectedButton)
                 selectedButton = 9
             }
@@ -178,6 +178,26 @@ class AddingSavingSpendingViewController: MoneyMachineViewController, UITableVie
         }
         
         return UITableViewCell()
+    }
+    
+    // Adding swipe to delete:
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            model.removeFromArrayAndDefaults(indexPathRow: indexPath.row)
+            tableView.reloadData()
+            print("deleting item at \(indexPath.row)")
+            switch Constants.transactionType {
+            case .savings:
+                headerValueLabel.text = String(TempItem.savingsTotal)
+            case .spending:
+                headerValueLabel.text = String(TempItem.spendingtotal)
+            }
+        }
     }
     
     

@@ -21,6 +21,8 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     // MARK: - Variables
     var classPurporse = "Report"
     var contextualArray = TempItem.transactionArray
+    let model = Models()
+
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
@@ -84,7 +86,8 @@ class ReportingViewController: MoneyMachineViewController, UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
+            model.removeFromArrayAndDefaults(indexPathRow: indexPath.row)
+            tableView.reloadData()
         }
     }
     

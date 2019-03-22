@@ -51,3 +51,7 @@ enum Tags: String {
 enum TransactionType: String {
     case spending, savings
 }
+
+enum OperationType {
+    case adding, subtracting
+}

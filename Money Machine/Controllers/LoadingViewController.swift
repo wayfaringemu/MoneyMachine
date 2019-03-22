@@ -22,13 +22,18 @@ class LoadingViewController: MoneyMachineViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
-        let storedCount = defaults.integer(forKey: "count")
-        for i in 1...storedCount {
+        var storedCount = defaults.integer(forKey: "count")
+        if storedCount < 0 {
+            storedCount = 0
+        }
+        var i = 0
+        for _ in 0...storedCount {
             if let dict = defaults.dictionary(forKey: String(i)) {
+                TempItem.storedArray.append(dict)
                 let transaction = Transaction(dictionary: dict as NSDictionary)
                 TempItem.transactionArray.append(transaction)
             }
+            i += 1
         }
     }
     
